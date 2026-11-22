@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دعوت به ختم گروهی · توشه آخرت</title>
+<meta name="theme-color" content="#0F6B55">
+<style>
+  :root { --bg:#F4F8F6; --card:#fff; --ink:#16302A; --muted:#5C7169; --green:#0F6B55; --line:#D6E3DD; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#10201B; --card:#18332B; --ink:#EAF3EE; --muted:#9BB5AA; --green:#4FC3A1; --line:#2B4A40; } }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+         background:var(--bg); color:var(--ink); font-family: Tahoma, "Noto Naskh Arabic", system-ui, sans-serif; }
+  .card { width:100%; max-width:420px; background:var(--card); border:1px solid var(--line); border-radius:22px; padding:26px 22px; text-align:center; }
+  .logo { width:60px; height:60px; border-radius:50%; background:var(--green); color:#fff; font-size:30px; line-height:60px; margin:0 auto 10px; }
+  h1 { font-size:19px; margin:8px 0 6px; line-height:1.8; }
+  p { color:var(--muted); font-size:14px; line-height:1.9; margin:4px 0 16px; }
+  .btn { display:block; width:100%; padding:13px; margin-top:10px; border-radius:14px; font-size:15px; text-decoration:none; border:1px solid var(--green); }
+  .primary { background:var(--green); color:#fff; }
+  .secondary { color:var(--green); background:transparent; }
+  .code { margin-top:18px; font-size:13px; color:var(--muted); }
+  .code b { display:inline-block; direction:ltr; font-size:18px; letter-spacing:1px; color:var(--ink); }
+  .copy { background:none; border:none; color:var(--green); font-size:13px; cursor:pointer; }
+  .hide { display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">☾</div>
+  <div style="font-size:13px;color:var(--muted)">توشه آخرت</div>
+  <h1>شما به یک ختم گروهی دعوت شده‌اید 🤲</h1>
+  <p id="msg">هر نفر یک جزء قرآن را برمی‌دارد تا با هم ختم کنیم. برای پیوستن، برنامه را نصب کنید.</p>
 
+  <a id="install" class="btn primary" href="#">نصب از گوگل‌پلی</a>
+  <a id="open" class="btn secondary hide" href="#">برنامه را دارم، باز کن</a>
+
+  <div id="codeBox" class="code hide">
+    کد ختم: <b id="code"></b><br>
+    <button class="copy" id="copy" type="button">کپی کد</button>
+  </div>
+</div>
+<script>
+(function () {
+  var PKG = 'com.quraishe.tousheh_app';
+  var HOST = location.host;
+  var raw = new URLSearchParams(location.search).get('c') || '';
+  // رقم‌های فارسی/عربی هم پذیرفته می‌شود
+  var digits = raw.replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); })
+                  .replace(/[٠-٩]/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'.indexOf(d); })
+                  .replace(/\D/g, '');
+  var valid = digits.length === 9;
+  var isAndroid = /android/i.test(navigator.userAgent);
+
+  var play = 'https://play.google.com/store/apps/details?id=' + PKG;
+  if (valid) play += '&referrer=' + encodeURIComponent('khatm=' + digits);
+  document.getElementById('install').href = play;
+
+  if (valid) {
+    var pretty = digits.slice(0, 3) + '-' + digits.slice(3, 6) + '-' + digits.slice(6);
+    document.getElementById('code').textContent = pretty;
+    document.getElementById('codeBox').classList.remove('hide');
+    document.getElementById('copy').onclick = function () {
+      if (navigator.clipboard) navigator.clipboard.writeText(pretty);
+      this.textContent = 'کپی شد ✓';
+    };
+    if (isAndroid) {
+      var open = document.getElementById('open');
+      open.href = 'intent://' + HOST + '/khatm/?c=' + digits + '#Intent;scheme=https;package=' + PKG + ';end';
+      open.classList.remove('hide');
+    }
+  } else {
+    document.getElementById('msg').textContent = 'این لینک کامل نیست. از فرستنده بخواهید دوباره بفرستد، یا برنامه را نصب کنید و کد ختم را دستی وارد کنید.';
+  }
+  if (!isAndroid) {
+    document.getElementById('msg').textContent += ' (این برنامه فعلاً فقط برای اندروید است.)';
+  }
+})();
+</script>
+</body>
+</html>
