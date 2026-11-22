@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.quraishe.tousheh_app",
+      "sha256_cert_fingerprints":
+        ["ED:43:19:9F:B1:0F:EC:CE:82:A5:62:96:CC:11:A6:11:50:60:4E:33:3A:61:CE:F1:D2:6D:4E:D6:65:DF:65:C3"]
+    }
+  }
+]
