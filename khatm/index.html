@@ -5,16 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>دعوت به ختم گروهی · توشه آخرت</title>
 <meta name="theme-color" content="#0F6B55">
+<link rel="icon" type="image/webp" href="logo.webp">
+<link rel="preload" href="Vazirmatn-Regular.subset.woff" as="font" type="font/woff" crossorigin>
 <style>
+  /* فونت وزیرمتن از همین مخزن بارگذاری می‌شود (بدون اینترنت و بدون سرویس بیرونی) */
+  @font-face { font-family: "Vazirmatn"; src: url("Vazirmatn-Regular.subset.woff") format("woff"); font-weight: normal; font-style: normal; font-display: swap; }
   :root { --bg:#F4F8F6; --card:#fff; --ink:#16302A; --muted:#5C7169; --green:#0F6B55; --line:#D6E3DD; }
   @media (prefers-color-scheme: dark) { :root { --bg:#10201B; --card:#18332B; --ink:#EAF3EE; --muted:#9BB5AA; --green:#4FC3A1; --line:#2B4A40; } }
   * { box-sizing:border-box; }
   body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
-         background:var(--bg); color:var(--ink); font-family: Tahoma, "Noto Naskh Arabic", system-ui, sans-serif; }
+         background:var(--bg); color:var(--ink); font-family: "Vazirmatn", Tahoma, system-ui, sans-serif; }
   .card { width:100%; max-width:420px; background:var(--card); border:1px solid var(--line); border-radius:22px; padding:26px 22px; text-align:center; }
-  .logo { width:60px; height:60px; border-radius:50%; background:var(--green); color:#fff; font-size:30px; line-height:60px; margin:0 auto 10px; }
+  .logo { display:block; width:96px; height:96px; margin:0 auto 10px; border-radius:22px; box-shadow:0 6px 18px rgba(15,107,85,.28); }
   h1 { font-size:19px; margin:8px 0 6px; line-height:1.8; }
   p { color:var(--muted); font-size:14px; line-height:1.9; margin:4px 0 16px; }
+  button, .btn { font-family: inherit; }
   .btn { display:block; width:100%; padding:13px; margin-top:10px; border-radius:14px; font-size:15px; text-decoration:none; border:1px solid var(--green); }
   .primary { background:var(--green); color:#fff; }
   .secondary { color:var(--green); background:transparent; }
@@ -26,7 +31,7 @@
 </head>
 <body>
 <div class="card">
-  <div class="logo">☾</div>
+  <img class="logo" src="logo.webp" width="96" height="96" alt="توشه آخرت">
   <div style="font-size:13px;color:var(--muted)">توشه آخرت</div>
   <h1>شما به یک ختم گروهی دعوت شده‌اید 🤲</h1>
   <p id="msg">هر نفر یک جزء قرآن را برمی‌دارد تا با هم ختم کنیم. برای پیوستن، برنامه را نصب کنید.</p>
